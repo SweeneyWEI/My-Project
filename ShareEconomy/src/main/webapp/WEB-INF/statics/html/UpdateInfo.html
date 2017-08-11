@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+昵称：<input type="text" placeholder="昵称" id="Aname" /></br>
+新密码：<input type="text" placeholder="请输入新密码" id="Npwd"/></br>
+确认密码：<input type="password" id="Cpwd" onblur="check(this.id)"/></br>
+确认修改：<input type="button" value="提交" onclick="UpdateUInfo()"/></br>
+</body>
+<script type="text/javascript" >
+    function  check(v){
+        if(v=="Cpwd"){
+            if($("#Cpwd").val()==$("#Npwd").val()){
+                console.log("true");
+            }
+            else {
+                alert("密码输入错误");
+            }
+        }
+    }
+    function UpdateUInfo(){
+        var Aname=$("#Aname").val();
+        var NewUpwd=$("#Npwd").val();
+
+        $.ajax({
+            type:"post",
+            url:"/cd/UpdateInfo.from?Aname="+Aname+"&NewUpassword="+NewUpwd,
+            dataType:"html",
+            success:function(msg){
+                if(msg==1){
+                    alert("成功");
+                }
+                else{
+                    alert("失败");
+                }
+            }
+        })
+
+    }
+</script>
+</html>

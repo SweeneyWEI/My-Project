@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+用户名:<input type="text" placeholder="input your username" id="username" onblur="check(this.id)"/><br>
+       <div id="res" style="color: red"></div>
+密码:<input type="password" placeholder="input your password" id="password"/><br>
+昵称：<input type="text" placeholder="your alias" id="Aname"><br>
+联系方式:<input type="text" placeholder="input your phone" id="usermobile"/><br>
+身份证号:<input type="text" placeholder="input your IDnumber" id="IDnumber"/><br>
+提交:<input type="button" value="submit" onclick="SignUp()">
+</body>
+<script type="text/javascript">
+
+    function check(v){
+        if(v=="username") {
+            var username = $("#username").val();
+            $.ajax({
+                type: "post",
+                url: "/cd/CheckUname.from?username=" + username.trim(),
+                dataType: "html",
+                success: function (msg) {
+                    if (msg == 1) {
+                        $("#res").html("用户名已被使用！");
+                    }
+                    else {
+                        $("#res").html("");
+                    }
+                }
+            })
+        }
+    }
+
+    function SignUp() {
+        var username = $("#username").val();
+        var password = $("#password").val();
+        var Aname = $("#Aname").val();
+        var usermobile = $("#usermobile").val();
+        var IDnumber = $("#IDnumber").val();
+
+        if(username==""||password==""||Aname==""||usermobile==""||IDnumber==""){
+            alert("内容不能为空");
+        }
+
+            else {
+            if ($("#res").html()!="") {
+                alert("用户名已注册！");
+            }
+            else {
+                $.ajax({
+
+                    type: "post",
+                    url: "/cd/SignUp.from?username=" + username.trim() + "&password=" + password.trim() + "&Aname=" + Aname +
+                    "&usermobile=" + usermobile.trim() + "&IDnumber=" + IDnumber.trim(),
+                    dataType: "html",
+                    success: function (msg) {
+                        if (msg == 1) {
+                            alert("注册成功，请登录");
+                        }
+                        else {
+                            alert("注册失败");
+                        }
+
+                    }
+                })
+            }
+        }
+    }
+
+</script>
+</html>

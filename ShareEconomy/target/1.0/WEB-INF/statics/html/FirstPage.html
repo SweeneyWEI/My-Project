@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+<br>
+<select id="select" onchange="getSelectValue()" name="demo">
+    <option selected value="0">请选择共享商品</option>
+    <option value="1">first</option>
+    <option value="2">second</option>
+    <option value="3">third</option>
+</select>
+确定：<input type="button" value="确定" onclick="getSelectValue()"></br>
+<input type="button" value="修改用户名" onclick="window.location='UpdateInfo.html'">
+</body>
+<script type="text/javascript">
+    function getSelectValue(){
+        var demo=$("#select").val();//返回选择项目的信息
+        alert(demo);
+    }
+</script>
+</html>

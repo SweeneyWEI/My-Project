@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/jquery-1.10.2.min.js"/>
+</head>
+<body>
+管理员:<input type="text" placeholder="手机号码/邮箱" id="Mname"/>
+密码：<input type="text" placeholder="请输入密码" id="Mpwd"/>
+登录：<input type="button" value="登录" onclick="Mlogin()"/>
+
+
+</body>
+
+<script type="text/javascript">
+    function Mlogin() {
+        var Mname=$("#Mnane").val();
+        var Mpwd=$("#Mpwd").val();
+
+        $.ajax({
+            type:"post",
+            url:"/ab/Mlogin.from?Mname="+Mname.trim()+"&Mpwd="+Mpwd.trim(),
+            dataType:"html",
+            success:
+            function (msg) {
+                if(msg=="1"){
+                    alert("ok");
+                }
+                else {
+                    alert("fail");
+                }
+            }
+
+        })
+
+    }
+
+</script>
+
+</html>
