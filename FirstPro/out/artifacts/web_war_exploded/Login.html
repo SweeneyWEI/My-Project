@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="./js/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+
+用户名：<input type="text" name="text" id="T1" placeholder="请输入用户名" autofocus="autofocus" onblur="Res()"/>
+<div id="res" style="color: red"></div>
+输入密码：<input type="password" name="pwd" id="T2" placeholder="请输入密码"/>
+确认密码：<input type="password" name="pwd1" id="T3" placeholder="确认密码" onblur="sure()"/>
+<div id="res2" style="color: red"></div>
+<input type="button" value="确认" id="yes" onclick="check()"/>
+<script type="text/javascript">
+
+    function isemailORtel() {
+        var regex = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+        return regex.test($("#T1").val());
+    }
+
+    function Res() {
+        if (!isemailORtel()) {
+            $("#res").html("格式不符合，请重新输入");
+        }
+        else {
+            $("#res").html("");
+        }
+    }
+
+    function sure() {
+        var upwd = $("#T2").val();
+        var newpwd = $("#T3").val();
+        if(upwd!=newpwd){
+            $("#res2").html("密码不符，请重新输入");
+        }
+        else $("#res2").html("");
+    }
+
+    function check() {
+       if(isemailORtel()) {
+           var uname = $("#T1").val();
+           var upwd = $("#T2").val();
+           var newpwd = $("#T3").val();
+
+           $.ajax({
+               type: "post",
+               url: "/Login?uname=" + uname + "&upwd=" + upwd + "&newpwd=" + newpwd,
+               dataType: "html",
+               success: function (msg) {
+                   if (msg !="0") {
+                       document.write(msg);
+                       console.log(msg);
+                   }
+                   else{
+                       alert("账户或密码错误");
+                   }
+               }
+           })
+       }
+       else alert("fail");
+    }
+
+</script>
+
+</body>
+</html>
