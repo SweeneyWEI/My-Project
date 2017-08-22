@@ -6,13 +6,11 @@
     <resultMap type="com.share.pojo.Manager" id="ManagerInfoResult">
         <id column="mid" property="mid"/>
         <result property="mname" column="mname"/>
-        <result property="mpassword" column="mpassword"/>
-
+        <result property="mpassword" column="mpassword"></result>
     </resultMap>
+
     <select id="Mlogin" parameterType="com.share.pojo.Manager" resultMap="ManagerInfoResult">
-        select * from Manager where mname={#mname} and mpassword={#mpassword}
+        select * from Manager where mname=#{mname} and mpassword=#{mpassword}
     </select>
-
-
 
 </mapper>

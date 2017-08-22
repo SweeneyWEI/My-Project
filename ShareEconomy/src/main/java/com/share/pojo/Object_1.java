@@ -3,7 +3,7 @@ package com.share.pojo;
 /**
  * Created by weixin on 17-8-6.
  */
-public class Object {
+public class Object_1 {
     private String oid;//产品id
     private String object;//产品类型
     private String amount;//产品数量
@@ -38,6 +38,17 @@ public class Object {
         return price;
     }
 
+    @Override
+    public String toString() {
+        return "Object_1{" +
+                "oid='" + oid + '\'' +
+                ", object='" + object + '\'' +
+                ", amount='" + amount + '\'' +
+                ", price='" + price + '\'' +
+                ", condition='" + condition + '\'' +
+                '}';
+    }
+
     public void setPrice(String price) {
         this.price = price;
     }
@@ -50,3 +61,4 @@ public class Object {
         this.condition = condition;
     }
 }
+

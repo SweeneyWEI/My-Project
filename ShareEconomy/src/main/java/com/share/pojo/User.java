@@ -10,6 +10,11 @@ public class User {
     private String alias;
     private String umobile;
     private String IDnumber;
+    private int wallet;
+    private String condition;
+
+
+
 
     public String getAlias() {
         return alias;
@@ -59,11 +64,33 @@ public class User {
         this.IDnumber = IDnumber;
     }
 
+    public int getWallet() {
+        return wallet;
+    }
+
+    public void setWallet(int wallet) {
+        this.wallet = wallet;
+    }
+
+    public String getCondition() {
+        return condition;
+    }
+
+    public void setCondition(String condition) {
+        this.condition = condition;
+    }
+
     @Override
     public String toString() {
-        return "User{"+"uid="+uid+'\''+", uname='" + uname + '\'' +
-                ", upassword='" + upwd + '\'' +
-                ", umobile='" + umobile + '\'' +",IDnumber="+IDnumber+'\''+
+        return "User{" +
+                "uid='" + uid + '\'' +
+                ", uname='" + uname + '\'' +
+                ", upwd='" + upwd + '\'' +
+                ", alias='" + alias + '\'' +
+                ", umobile='" + umobile + '\'' +
+                ", IDnumber='" + IDnumber + '\'' +
+                ", wallet=" + wallet +
+                ", condition='" + condition + '\'' +
                 '}';
     }
 }

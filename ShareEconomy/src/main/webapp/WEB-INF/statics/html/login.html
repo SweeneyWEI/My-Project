@@ -2,16 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>ShareEconomy</title>
     <script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
 </head>
 <body>
-用户名：<input type="text" placeholder="请输入手机号/邮箱地址" id="username" /></br>
-       <div id="res" style="color: red" ></div>
+用户名：<input type="text" placeholder="请输入手机号/邮箱地址" id="username" autofocus="autofocus"/></br>
+       <div id="res" style="color: red"></div>
 密码：<input type="password" placeholder="请输入密码" id="password"/></br>
        <div id="res1" style="color: red"></div>
 登录：<input type="button" value="登录" onclick="login()"/>
 注册：<input type="button" value="注册" onclick="window.location='SignUp.html'"/>
+管理员登录：<input type="button" value="管理员" onclick="window.location='Mlogin.html'"/>
 </body>
 <script type="text/javascript">
 
@@ -29,16 +30,20 @@
             $("#res").html("");
             $("#res1").html("");
 
+
             $.ajax({
                 type: "post",
                 url: "/cd/login.form?username=" + username.trim() + "&password=" + password.trim(),
                 dataType: "html",
                 success: function (msg) {
-                    if (msg == "1") {
+                    if(msg=="2"){
+                        alert("该用户已经登录")
+                    }else if (msg == "1") {
                         window.location.href = 'FirstPage.html';
                     }
                     else if (msg == "0") {
                         alert("用户名或者密码错误");
+                        console.log("password"+document.getElementById("password").value);
                     }
                 }
             })

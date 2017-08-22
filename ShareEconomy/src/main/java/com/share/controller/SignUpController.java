@@ -40,6 +40,7 @@ public class SignUpController {
         user.setAlias(Aname);
         user.setUmobile(usermobile);
         user.setIDnumber(IDnumber);
+        user.setWallet(0);
         int res = userService.SignUp(user);
         if (res == 1)
         {

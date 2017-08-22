@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
+</head>
+<br>
+<!--<div id="res" style="color: red"></div>-->
+<input type="button" value="修改用户名" onclick="window.location='UpdateInfo.html'">
+
+<div align="center">
+    <select id="select2" name="demo2">
+        <option selected value="10">10￥</option>
+        <option value="20">20￥</option>
+        <option value="50">50￥</option>
+        <option value="100">100￥</option>
+    </select>
+    <input type="button" value="充值" onclick= "Recharge()" >
+</div>
+</body>
+<script type="text/javascript">
+
+    function Recharge() {
+        var account=$("#select2").val();
+        console.log(account);
+        $.ajax({
+            type:"post",
+            url:"/ef/recharge.from?account="+account.trim(),
+            dataType:"html",
+            success:function (msg) {
+                if(msg=="1"){
+                    alert("充值成功");
+                }
+            }
+        })
+    }
+</script>
+</html>

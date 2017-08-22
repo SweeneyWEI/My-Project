@@ -5,6 +5,8 @@
     <title>Title</title>
     <script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
 </head>
+<body>
+<div id="res1" style="color: red"></div>
 用户名:<input type="text" placeholder="input your username" id="username" onblur="check(this.id)"/><br>
        <div id="res" style="color: red"></div>
 密码:<input type="password" placeholder="input your password" id="password"/><br>
@@ -14,6 +16,7 @@
 提交:<input type="button" value="submit" onclick="SignUp()">
 </body>
 <script type="text/javascript">
+
 
     function check(v){
         if(v=="username") {

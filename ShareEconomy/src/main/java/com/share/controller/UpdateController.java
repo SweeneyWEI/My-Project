@@ -41,7 +41,7 @@ public class UpdateController {
         if (oCookies != null) {
             for (final Cookie oItem : oCookies) {
                 final String sName = oItem.getName();
-                if (sName.equals("ssid")) {
+                if (sName.equals("ssid")){
                     user = new User();
                     user.setUid(oItem.getValue());
                     user.setUpwd(NewUpassword);

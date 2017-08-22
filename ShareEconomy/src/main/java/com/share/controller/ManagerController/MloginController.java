@@ -1,7 +1,8 @@
-package com.share.controller;
+package com.share.controller.ManagerController;
 
 import com.share.pojo.Manager;
 import com.share.service.ManagerService;
+import com.share.service.ObjectService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,16 +21,19 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/ab")
 public class MloginController {
     private static Logger logger=Logger.getLogger(MloginController.class);
+    /**
+     *
+     */
     @Autowired
     private ManagerService managerService;
     private Manager manager;
-    @RequestMapping(value = "/Mlogin.form",method = RequestMethod.POST,produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/Mlogin.from",method = RequestMethod.POST,produces = "application/json; charset=utf-8")
     public @ResponseBody
     Object GetManager(HttpServletRequest request,HttpServletResponse response ){
         String mname=request.getParameter("Mname").trim();
         String mpwd=request.getParameter("Mpwd").trim();
         manager=new Manager();
-        manager.setMid(mname);
+        manager.setMname(mname);
         manager.setMpassword(mpwd);
         Manager res=managerService.Mlogin(manager);
         if(res!=null){

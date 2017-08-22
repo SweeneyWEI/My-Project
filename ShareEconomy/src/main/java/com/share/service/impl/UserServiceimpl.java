@@ -15,8 +15,8 @@ public class UserServiceimpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public User getUserById(String u_id) {
-        return userMapper.getUserById(u_id);
+    public User getUserById(User user) {
+        return userMapper.getUserById(user);
     }
 
     @Override
@@ -37,7 +37,20 @@ public class UserServiceimpl implements UserService {
     @Override
     public User CheckUname(User user) {
         return userMapper.CheckUname(user);
-
     }
+
+    @Override
+    public int reCharge(User user) {
+        return userMapper.reCharge(user);
+    }
+
+    @Override
+    public int loginChangeCon(User user) {
+        return userMapper.loginChangeCon(user);
+    }
+
 }
+
+
+
 

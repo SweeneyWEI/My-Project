@@ -6,19 +6,53 @@
     <script type="text/javascript" src="../js/jquery-1.10.2.min.js"></script>
 </head>
 <br>
-<select id="select" onchange="getSelectValue()" name="demo">
+<select id="select" name="demo">
     <option selected value="0">请选择共享商品</option>
-    <option value="1">first</option>
-    <option value="2">second</option>
-    <option value="3">third</option>
+    <option value="1">Bike</option>
+    <option value="2">Car</option>
+    <option value="3">ChargeBaby</option>
 </select>
 确定：<input type="button" value="确定" onclick="getSelectValue()"></br>
-<input type="button" value="修改用户名" onclick="window.location='UpdateInfo.html'">
+<div id="res" style="color: dodgerblue"></div>
+
+个人操作：<input type="button" value="个人操作" id="button1" onclick="window.location.href='UserOperation.html'"/>
+退出登录：<input type="button" id="button2" value="log out" onclick="logout()"/>
+<div align="center">
+使用：<input type="button" id="button" value="现在使用" name="use" onclick="window.location.href='Useing.html'">
+
+
+</div><!--<div id="res" style="color: red"></div>-->
+
 </body>
 <script type="text/javascript">
+
     function getSelectValue(){
         var demo=$("#select").val();//返回选择项目的信息
-        alert(demo);
+        console.log(demo);
+        $.ajax({
+            type:"post",
+            url:"/cd/ObjInfo.from?Chioce="+demo.trim(),
+            dataType:"html",
+            success:function (msg) {
+                if(msg!==""){
+//                    alert("a");
+                    $("#res").html(msg);
+                }
+            }
+        })
+    }
+    function logout(){
+        $.ajax({
+            type:"post",
+            url:"/cd/logout.from?signal=out",
+            datatype:"html",
+            success:function (msg) {
+                if(msg==1){
+                    window.location.href='login.html';
+                }
+
+            }
+        })
     }
 </script>
 </html>

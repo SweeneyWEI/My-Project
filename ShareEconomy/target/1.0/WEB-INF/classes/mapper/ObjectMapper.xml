@@ -3,7 +3,7 @@
                 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.share.mapper.ObjectMapper">
-    <resultMap type="com.share.pojo.Object" id="ObjectInfoResult">
+    <resultMap type="com.share.pojo.Object_1" id="ObjectInfoResult">
         <id column="oid" property="oid"/>
         <result property="object" column="object"/>
         <result property="amount" column="amount"/>
@@ -11,8 +11,11 @@
         <result property="condition" column="condition"></result>
     </resultMap>
 
+    <insert id="IncObj" parameterType="com.share.pojo.Object_1">
+    INSERT into Objects values(#{oid},#{object},#{amount},#{price},#{condition});
+</insert>
 
-
-
-
+    <select id="ObjInfo" parameterType="com.share.pojo.Object_1" resultMap="ObjectInfoResult">
+        SELECT * from Objects where oid=#{oid}
+    </select>
     </mapper>

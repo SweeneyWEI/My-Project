@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  * Created by weixin on 17-7-31.
  */
 @Controller
-@RequestMapping("/cd")
+@RequestMapping("/cd")//mapping
 public class LoginController {
     private static Logger log=Logger.getLogger(LoginController.class);
     @Autowired
@@ -27,25 +27,42 @@ public class LoginController {
     @RequestMapping(value = "/login.form",method = RequestMethod.POST,produces = "application/json; charset=utf-8")
     public @ResponseBody
     Object getUser(HttpServletRequest request, HttpServletResponse response){
-        String username=request.getParameter("username").trim();
+        String username=request.getParameter("username").trim();//get the values from client.
         String password=request.getParameter("password").trim();
         user=new User();
-        user.setUname(username);
+        user.setUname(username);//set the values
         user.setUpwd(password);
         User res=userService.login(user);
 
-        if(res!=null){
-            Cookie cookie = new Cookie("ssid",res.getUid());
-            cookie.setPath("/");
-            cookie.setMaxAge(60*60*24);
-            response.addCookie(cookie);
-            log.info(res.toString());
-            return "1";
+        if(res.getCondition().equals("0")) {//change the condition
+                res.setCondition("1");
+              int rescount= userService.loginChangeCon(res);
+              if (rescount==1) {
+                  if (res != null) {
+                      Cookie cookie = new Cookie("ssid", res.getUid());//save the cookie.
+                      Cookie cookie1 = new Cookie("ssname", res.getUname());
+                      Cookie cookie2 = new Cookie("ssaccount", res.getWallet() + "");
+                      cookie.setPath("/");//the root directory
+                      cookie1.setPath("/");
+                      cookie2.setPath("/");
+                      cookie.setMaxAge(60 * 60 * 24);
+                      cookie1.setMaxAge(60 * 60 * 24);
+                      cookie2.setMaxAge(60 * 60 * 24);
+                      response.addCookie(cookie);
+                      response.addCookie(cookie1);
+                      response.addCookie(cookie2);
+                      log.info(res.toString());
+                      return "1";
+                  } else {
+                      log.error(res);
+                      return "0";
+                  }
+              }
+              else {
+                  return "0";
+              }
         }
-        else{
-            log.error(res);
-            return "0";
-        }
+        else return "2";
     }
 
 }

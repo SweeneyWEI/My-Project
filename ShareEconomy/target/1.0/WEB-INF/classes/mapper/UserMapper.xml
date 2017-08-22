@@ -8,7 +8,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="uname" column="uname"/>
 		<result property="upwd" column="upwd"/>
 		<result property="umobile" column="umobile"/>
-		<result property="IDnumber" column="IDnumber"></result>
+		<result property="IDnumber" column="IDnumber"/>
+		<result property="wallet" column="wallet"/>
+		<result property="condition" column="condition"></result>
 	</resultMap>
 
     <!-- 通过id查找用户 -->
@@ -16,16 +18,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from User where uname=#{uname}
 	</select>
 
-    <select id="getUserById" parameterType="String" resultMap="UserInfoResult">
-        select * from User where uid=#{uid}
+    <select id="getUserById" parameterType="com.share.pojo.User" resultMap="UserInfoResult">
+        select * from `User` where `uid`=#{uid}
     </select>
     <!--登录-->
 	<select id="login" parameterType="com.share.pojo.User" resultMap="UserInfoResult">
 		select * from User where uname=#{uname} and upwd=#{upwd}
 	</select>
+
+
+	<update id="loginChangeCon" parameterType="com.share.pojo.User">
+		update `User`
+		<trim prefix="set" suffixOverrides=",">
+			<if test="uname!=null">`uname`=#{uname},</if>
+			<if test="upwd!=null">`upwd`=#{upwd},</if>
+			<if test="umobile!=null">`umobile`=#{umobile},</if>
+			<if test="IDnumber!=null">`IDnumber`=#{IDnumber},</if>
+			<if test="wallet!=null">`wallet`=#{wallet},</if>
+			<if test="condition!=null">`condition`=#{condition},</if>
+		</trim>
+		where uid=#{uid}
+	</update>
+
+
 	<insert id="SignUp" parameterType="com.share.pojo.User">
-		insert into User values(#{uid},#{uname},#{upwd},#{alias},#{umobile},#{IDnumber});
+		insert into User values(#{uid},#{uname},#{upwd},#{alias},#{umobile},#{IDnumber},#{wallet});
 	</insert>
+
 	<update id="UpdateInfo" parameterType="com.share.pojo.User">
 		UPDATE User
 		<trim prefix="set" suffixOverrides=",">
@@ -34,4 +53,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</trim>
 		WHERE uid=#{uid}
 	</update>
+
+	<update id="reCharge" parameterType="com.share.pojo.User">
+		UPDATE User
+		<trim prefix="set" suffixOverrides=",">
+			<if test="wallet!=null">wallet=#{wallet},</if>
+		</trim>
+				WHERE uname=#{uname}
+	</update>
+
+
 </mapper> 
