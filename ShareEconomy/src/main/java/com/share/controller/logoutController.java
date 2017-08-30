@@ -41,8 +41,8 @@ public class logoutController {
                  int rescount=  userService.loginChangeCon(res);
                 }
             }
-
         }
+
         return 1;
     }
 }

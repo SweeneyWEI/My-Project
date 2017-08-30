@@ -18,7 +18,7 @@
 个人操作：<input type="button" value="个人操作" id="button1" onclick="window.location.href='UserOperation.html'"/>
 退出登录：<input type="button" id="button2" value="log out" onclick="logout()"/>
 <div align="center">
-使用：<input type="button" id="button" value="现在使用" name="use" onclick="window.location.href='Useing.html'">
+使用：<input type="button" id="button" value="现在使用" name="use" onclick="window.location.href='Using.html'">
 
 
 </div><!--<div id="res" style="color: red"></div>-->
@@ -44,10 +44,11 @@
     function logout(){
         $.ajax({
             type:"post",
-            url:"/cd/logout.from?signal=out",
+            url:"/cd/logout.from",
             datatype:"html",
             success:function (msg) {
                 if(msg==1){
+
                     window.location.href='login.html';
                 }
 

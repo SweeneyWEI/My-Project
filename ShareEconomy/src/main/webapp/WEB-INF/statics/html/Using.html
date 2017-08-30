@@ -40,7 +40,7 @@
             function Paying() {
                 if (isUp!=true) {
                     var time = document.getElementById("mytime").innerText;
-                    console.log(time);
+//                    console.log(time);
 
                     $.ajax({
                         type: "post",
@@ -50,10 +50,10 @@
                             var con;
                             con = confirm("确定费用：" + msg);
                             if (con == true) {
-                                window.location.href = '';
+                                window.location.href = 'FirstPage.html';
                             }
                             else {
-                                alert("asdsadas");
+                                alert("123");
                             }
 
                         }
